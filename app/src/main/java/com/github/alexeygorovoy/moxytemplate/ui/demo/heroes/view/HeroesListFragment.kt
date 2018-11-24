@@ -9,15 +9,17 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.alexeygorovoy.moxytemplate.R
 import com.github.alexeygorovoy.moxytemplate.api.models.Hero
-import com.github.alexeygorovoy.moxytemplate.dagger.demo.heroes.HeroesModule
+import com.github.alexeygorovoy.moxytemplate.dagger.demo.heroes.HeroesComponent
 import com.github.alexeygorovoy.moxytemplate.navigation.Router
 import com.github.alexeygorovoy.moxytemplate.ui.common.moxy.BaseMvpFragment
 import com.github.alexeygorovoy.moxytemplate.ui.demo.heroes.presenter.HeroesListPresenter
 import com.github.alexeygorovoy.moxytemplate.ui.demo.heroes.view.adapter.HeroesAdapter
 import kotlinx.android.synthetic.main.fragment_heroes_list.*
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.support.CompatInjectionManager
 import javax.inject.Inject
 
-class HeroesListFragment : BaseMvpFragment(), HeroesListView {
+class HeroesListFragment : BaseMvpFragment(), HeroesListView, IHasComponent<HeroesComponent> {
 
     @Inject
     lateinit var router: Router
@@ -34,7 +36,9 @@ class HeroesListFragment : BaseMvpFragment(), HeroesListView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        activityComponent.plus(HeroesModule()).inject(this)
+        CompatInjectionManager
+            .bindComponent(this)
+            .inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -65,6 +69,8 @@ class HeroesListFragment : BaseMvpFragment(), HeroesListView {
     override fun hideProgress() {
         progressBar.hide()
     }
+
+    override fun getComponent() = HeroesComponent()
 
     companion object {
 

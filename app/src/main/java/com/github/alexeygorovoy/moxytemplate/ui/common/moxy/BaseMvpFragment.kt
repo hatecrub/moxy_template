@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.github.alexeygorovoy.moxytemplate.dagger.activity.ActivityComponent
 import com.github.alexeygorovoy.moxytemplate.ui.common.BaseActivity
 
 import es.dmoral.toasty.Toasty
@@ -14,9 +13,6 @@ import rx.subscriptions.CompositeSubscription
 open class BaseMvpFragment : MvpAppCompatFragment(), BaseMvpView {
 
     private var subscriptions = CompositeSubscription()
-
-    protected val activityComponent: ActivityComponent
-        get() = baseActivity.getActivityComponent()
 
     protected val baseActivity: BaseActivity
         get() = requireActivity() as BaseActivity

@@ -1,23 +1,22 @@
 package com.github.alexeygorovoy.moxytemplate
 
 import android.app.Application
-
 import com.github.alexeygorovoy.moxytemplate.dagger.app.AppComponent
-import com.github.alexeygorovoy.moxytemplate.dagger.app.AppContextModule
-import com.github.alexeygorovoy.moxytemplate.dagger.app.DaggerAppComponent
 import com.squareup.leakcanary.LeakCanary
-
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.support.CompatInjectionManager
 import timber.log.Timber
 
-class App : Application() {
-
-    lateinit var appComponent: AppComponent
-        private set
+class App : Application(), IHasComponent<AppComponent> {
 
     override fun onCreate() {
         super.onCreate()
+
+        CompatInjectionManager.init(this)
+
+        CompatInjectionManager.bindComponent(this)
+
         initialiseLogger()
-        initAppComponent()
 
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
@@ -25,9 +24,7 @@ class App : Application() {
         LeakCanary.install(this)
     }
 
-    private fun initAppComponent() {
-        appComponent = DaggerAppComponent.builder().appContextModule(AppContextModule(this)).build()
-    }
+    override fun getComponent() = AppComponent(this)
 
     private fun initialiseLogger() {
         @Suppress("ConstantConditionIf")

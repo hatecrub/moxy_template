@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.github.alexeygorovoy.moxytemplate.R
-import com.github.alexeygorovoy.moxytemplate.dagger.demo.splash.SplashModule
+import com.github.alexeygorovoy.moxytemplate.dagger.demo.splash.SplashComponent
 import com.github.alexeygorovoy.moxytemplate.navigation.Router
 import com.github.alexeygorovoy.moxytemplate.ui.common.moxy.BaseMvpFragment
 import com.github.alexeygorovoy.moxytemplate.ui.demo.splash.presenter.SplashPresenter
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.support.CompatInjectionManager
 import javax.inject.Inject
 
-class SplashFragment : BaseMvpFragment(), SplashView {
+class SplashFragment : BaseMvpFragment(), SplashView, IHasComponent<SplashComponent> {
 
     @Inject
     lateinit var router: Router
@@ -28,7 +30,9 @@ class SplashFragment : BaseMvpFragment(), SplashView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        activityComponent.plus(SplashModule()).inject(this)
+        CompatInjectionManager
+            .bindComponent(this)
+            .inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -41,4 +45,6 @@ class SplashFragment : BaseMvpFragment(), SplashView {
         router.startMainActivity(activity)
         activity.finish()
     }
+
+    override fun getComponent() = SplashComponent()
 }

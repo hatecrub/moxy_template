@@ -10,14 +10,16 @@ import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.bumptech.glide.Glide
 import com.github.alexeygorovoy.moxytemplate.R
 import com.github.alexeygorovoy.moxytemplate.api.models.Hero
-import com.github.alexeygorovoy.moxytemplate.dagger.demo.details.HeroDetailsModule
+import com.github.alexeygorovoy.moxytemplate.dagger.demo.details.HeroDetailsComponent
 import com.github.alexeygorovoy.moxytemplate.ui.common.moxy.BaseMvpFragment
 import com.github.alexeygorovoy.moxytemplate.ui.demo.details.presenter.HeroDetailsPresenter
 import kotlinx.android.synthetic.main.fragment_hero_details.*
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.support.CompatInjectionManager
 import timber.log.Timber
 import javax.inject.Inject
 
-class HeroDetailsFragment : BaseMvpFragment(), HeroDetailsView {
+class HeroDetailsFragment : BaseMvpFragment(), HeroDetailsView, IHasComponent<HeroDetailsComponent> {
 
     @Inject
     @InjectPresenter
@@ -38,7 +40,9 @@ class HeroDetailsFragment : BaseMvpFragment(), HeroDetailsView {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        activityComponent.plus(HeroDetailsModule()).inject(this)
+        CompatInjectionManager
+            .bindComponent(this)
+            .inject(this)
         super.onCreate(savedInstanceState)
     }
 
@@ -53,6 +57,8 @@ class HeroDetailsFragment : BaseMvpFragment(), HeroDetailsView {
         heroIntro.text = if (TextUtils.isEmpty(hero.intro)) "no intro" else hero.intro
         heroText.text = if (TextUtils.isEmpty(hero.text)) "no text" else hero.text
     }
+
+    override fun getComponent() = HeroDetailsComponent()
 
     companion object {
 
