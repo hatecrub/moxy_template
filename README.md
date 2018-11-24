@@ -6,6 +6,7 @@ Originally based on [this project by @yassine-gharsallah](https://github.com/yas
 Libraries included:
 - [Moxy](https://github.com/Arello-Mobile/Moxy)
 - [Dagger (2.x)](https://github.com/google/dagger)
+- [ComponentsManager](https://github.com/ValeryPonomarenko/ComponentsManager)
 - [RxJava (1.x)](https://github.com/ReactiveX/RxJava)
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
 - [Retrofit](https://github.com/square/retrofit)
