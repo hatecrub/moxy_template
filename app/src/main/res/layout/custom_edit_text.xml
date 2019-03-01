@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_text_horizontal_padding"
+        android:layout_marginRight="@dimen/default_text_horizontal_padding"
+        android:textColor="@color/black_50" />
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:background="@null"
+        android:paddingLeft="@dimen/default_text_horizontal_padding"
+        android:paddingTop="0dp"
+        android:paddingRight="@dimen/default_text_horizontal_padding"
+        android:textColor="@color/black_70"
+        android:textColorHint="@color/black_30" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/black_80" />
+
+    <TextView
+        android:id="@+id/errorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/default_text_horizontal_padding"
+        android:layout_marginRight="@dimen/default_text_horizontal_padding"
+        android:textColor="@color/error"
+        android:visibility="invisible" />
+
+
+</merge>
