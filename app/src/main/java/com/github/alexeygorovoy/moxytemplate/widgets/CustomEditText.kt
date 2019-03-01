@@ -76,9 +76,6 @@ constructor(
         editText.inputType = inputType
     }
 
-
-
-
     fun setHint(hint: CharSequence?) {
         editText.hint = hint
     }
@@ -89,6 +86,11 @@ constructor(
 
     fun setErrorMessage(error: CharSequence?) {
         errorMessageView.text = error
+    }
+
+    fun showErrorMessage(error: CharSequence?) {
+        errorMessageView.text = error
+        showError()
     }
 
     fun setText(text: CharSequence?) {
